@@ -15,7 +15,7 @@ try:
     driver.get("https://www.facebook.com/")
 
     # Get email and password from user and attepmt login until successful
-    validAccount = false
+    validAccount = False
     while not validAccount:
         email = input("Enter your email: ")
         password = input("Enter password: ")
@@ -41,12 +41,16 @@ try:
         print("Login button found.")
         
         # if the account is valid and it logs in then set valid account to true and leave while
-        # if we go to this link: 
-        # https://www.facebook.com/login/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNzMyMDE1Nzg4LCJjYWxsc2l0ZV9pZCI6MzgxMjI5MDc5NTc1OTQ2fQ%3D%3D&next
-        # Then click the back button and try again
-
-
-
+        current_url = driver.current_url
+        if "login/?privacy_mutation_token" in current_url:
+            print("Login failed, Try again")
+            driver.back()
+            time.sleep(5)
+            email_input = driver.find_element(By.NAME, 'email')
+            email_input.clear()
+        else:
+            validAccount = True
+            print("Login successful!")
 
     # Wait for 10 seconds as a general pause
     time.sleep(10)
