@@ -56,6 +56,8 @@ try:
     time.sleep(10)
     print("Successfully logged in and profile page loaded.")
 
+    # Here I want to go to the friends tab and save every friend name to a json folder
+    name_list = []
 
 
     # Keep the browser open to observe
